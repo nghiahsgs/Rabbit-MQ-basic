@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  rabbitmq_0:
+    container_name: rabbitmq_0
+    image: "rabbitmq:3.9.14-management-alpine"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=pass
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    healthcheck:
+        test: ["CMD", "wget", "-qO-", "http://localhost:15672"]
+        interval: 10s
+        timeout: 10s
+        retries: 5
+  
